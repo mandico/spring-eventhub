@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    azure:
+      eventgrid:
+        endpoint: ${AZURE_EVENTGRID_ENDPOINT:https://azr-egct-demo.brazilsouth-1.eventgrid.azure.net/api/events}
+        key: ${AZURE_EVENTGRID_KEY:4V7JjPWD9GDhUQzVJP8jTjf6gFXaDgnZ6UIazL4rsnA=}
+      servicebus:
+        connection-string: ${AZURE_SERVICEBUS_CONNECTION_STRING:Endpoint=sb://azr-sb-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0IXqHsQSFbyl0STLbZt3A6KBE7aR4/5wq+ASbIVM2fk=}
+    function:
+      definition: consume
+    stream:
+      bindings:
+        consume-in-0:
+          destination: ${AZURE_SERVICEBUS_QUEUE_NAME:queue-demo}
+      servicebus:
+        bindings:
+          consume-in-0:
+            consumer:
+              auto-complete: false
